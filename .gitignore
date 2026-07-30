@@ -1,0 +1,29 @@
+# 依賴套件
+node_modules/
+
+# 內部真實數據樣本（不上傳到公開 repo，需要版控請告知）
+廠內品質與產能日報.html
+
+# 環境變數 / 機敏設定（絕對不要上傳）
+.env
+.env.*
+*.key
+*.pem
+secrets.json
+
+# 建置產物（若日後有打包流程再依需要調整）
+dist/
+build/
+.cache/
+
+# Windows / 編輯器雜項
+Thumbs.db
+desktop.ini
+~$*
+*.tmp
+.vscode/
+.idea/
+
+# Excel / Access 暫存鎖檔
+~$*.xls*
+*.laccdb

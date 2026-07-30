@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>廠內品質與產能日報</title>
+<style>
+:root{
+  --page:#f2f1ec; --s1:#f8f7f3; --s2:#ffffff; --s0:#e8e7e1;
+  --tx1:#16160f; --tx2:#55544e; --tx3:#8a8880;
+  --line:rgba(20,20,14,.12); --line2:rgba(20,20,14,.22);
+  --red:#c0392f; --orange:#d9713f; --amber:#c98d0a; --gray:#8a8880;
+  --blue:#1f66bd; --blue-d:#164e91; --green:#12805c;
+  --bg-red:#fbe9e7; --tx-red:#7d1f18;
+  --bg-amber:#faefd8; --tx-amber:#6b4405;
+  --bg-green:#e6f2e4; --tx-green:#1c5230;
+  --radius:8px; --card:12px;
+}
+@media (prefers-color-scheme:dark){
+  :root[data-theme="auto"]{
+    --page:#131312; --s1:#1c1c1a; --s2:#232321; --s0:#111110;
+    --tx1:#f4f3ee; --tx2:#b4b2a8; --tx3:#87857d;
+    --line:rgba(255,255,255,.12); --line2:rgba(255,255,255,.22);
+    --red:#e56b60; --orange:#e08a5c; --amber:#dfa62c; --gray:#8a8880;
+    --blue:#5b9ce8; --blue-d:#7cb0ec; --green:#3fb98d;
+    --bg-red:#3a1c19; --tx-red:#f3b8b1;
+    --bg-amber:#3a2c0d; --tx-amber:#f0cd85;
+    --bg-green:#15301f; --tx-green:#9dd6ac;
+  }
+}
+:root[data-theme="dark"]{
+  --page:#131312; --s1:#1c1c1a; --s2:#232321; --s0:#111110;
+  --tx1:#f4f3ee; --tx2:#b4b2a8; --tx3:#87857d;
+  --line:rgba(255,255,255,.12); --line2:rgba(255,255,255,.22);
+  --red:#e56b60; --orange:#e08a5c; --amber:#dfa62c; --gray:#8a8880;
+  --blue:#5b9ce8; --blue-d:#7cb0ec; --green:#3fb98d;
+  --bg-red:#3a1c19; --tx-red:#f3b8b1;
+  --bg-amber:#3a2c0d; --tx-amber:#f0cd85;
+  --bg-green:#15301f; --tx-green:#9dd6ac;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--page); color:var(--tx1);
+  font-family:"Inter","Noto Sans TC","PingFang TC","Microsoft JhengHei",
+    system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:15px; line-height:1.6;
+  font-variant-numeric:tabular-nums;
+  padding:24px 20px 48px;
+}
+.wrap{max-width:1080px;margin:0 auto}
+
+.demo{
+  display:flex;align-items:center;gap:10px;
+  background:var(--bg-amber);color:var(--tx-amber);
+  border-radius:var(--radius);padding:10px 14px;
+  font-size:13px;margin-bottom:18px;
+}
+.demo b{font-weight:600}
+
+.topbar{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+h1{font-size:21px;font-weight:600;letter-spacing:-.01em}
+.stamp{font-size:12.5px;color:var(--tx3);margin-top:2px}
+.tools{display:flex;gap:8px}
+button{
+  font:inherit;font-size:13px;color:var(--tx2);
+  background:var(--s2);border:1px solid var(--line2);
+  border-radius:var(--radius);padding:6px 13px;cursor:pointer;
+}
+button:hover{background:var(--s1);color:var(--tx1)}
+button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+h2{font-size:16px;font-weight:600;letter-spacing:-.005em}
+.sec{margin-bottom:14px}
+.card{background:var(--s2);border:1px solid var(--line);border-radius:var(--card);padding:18px 20px}
+.card.flat{background:var(--s1);border-color:transparent}
+.hd{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.hd .meta{font-size:12.5px;color:var(--tx3)}
+.note{font-size:12.5px;color:var(--tx3);margin-top:12px;line-height:1.55}
+
+.hero{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
+.hero>div{border-radius:var(--card);padding:18px 20px}
+.hero .lbl{font-size:13px;font-weight:500}
+.hero .big{font-size:46px;line-height:1.02;font-weight:600;letter-spacing:-.03em;margin:4px 0 2px}
+.hero .sub{font-size:13px}
+.h-red{background:var(--bg-red)} .h-red .lbl,.h-red .sub{color:var(--tx-red);opacity:.85} .h-red .big{color:var(--tx-red)}
+.h-amber{background:var(--bg-amber)} .h-amber .lbl,.h-amber .sub{color:var(--tx-amber);opacity:.85} .h-amber .big{color:var(--tx-amber)}
+.h-green{background:var(--bg-green)} .h-green .lbl,.h-green .sub{color:var(--tx-green);opacity:.85} .h-green .big{color:var(--tx-green)}
+
+.rank{display:flex;flex-direction:column;gap:13px}
+.rank .row{display:flex;justify-content:space-between;gap:12px;font-size:14.5px;margin-bottom:6px}
+.rank .row .v{color:var(--tx2);white-space:nowrap}
+.track{height:13px;border-radius:7px;background:var(--s0);overflow:hidden}
+.track>span{display:block;height:100%;border-radius:7px}
+
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.kpi{background:var(--s1);border-radius:var(--radius);padding:14px 16px}
+.card.flat .kpi{background:var(--s2)}
+.kpi .k{font-size:12.5px;color:var(--tx2)}
+.kpi .n{font-size:25px;font-weight:600;letter-spacing:-.02em;margin-top:2px}
+.kpi .u{font-size:13px;font-weight:400;color:var(--tx3)}
+.kpi .f{font-size:12px;color:var(--tx3);margin-top:2px}
+
+.legend{display:flex;flex-wrap:wrap;gap:16px;font-size:12.5px;color:var(--tx2);margin-bottom:12px}
+.legend span{display:flex;align-items:center;gap:6px}
+.dot{width:10px;height:10px;border-radius:2px;flex:none}
+
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:520px}
+th{font-size:12px;font-weight:400;color:var(--tx2);text-align:left;padding:0 0 8px;white-space:nowrap}
+td{padding:7px 0;border-top:1px solid var(--line)}
+tr:first-child th{border-bottom:1px solid var(--line2)}
+.num{text-align:right;white-space:nowrap}
+.dim{color:var(--tx3)}
+.warn{color:var(--amber)} .bad{color:var(--red);font-weight:500}
+tr.sum td{border-top:1px solid var(--line2);font-weight:600}
+tr.off td{color:var(--tx3)}
+.bar{display:inline-flex;align-items:center;gap:9px;width:100%;min-width:150px}
+.bar .t{flex:1;height:6px;border-radius:3px;background:var(--s0);overflow:hidden}
+.bar .t>i{display:block;height:100%;border-radius:3px}
+.bar .p{width:34px;text-align:right}
+.stack{display:flex;height:10px;border-radius:5px;overflow:hidden;background:var(--s0);min-width:130px}
+.stack>i{display:block;height:100%}
+.pad{padding-left:14px}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .hero .big{font-size:40px}
+}
+@media (max-width:520px){
+  body{padding:16px 14px 36px}
+  .kpis{grid-template-columns:1fr}
+}
+@media print{
+  body{background:#fff;padding:0;font-size:11px}
+  .tools{display:none}
+  .card{break-inside:avoid;border:1px solid #ccc}
+  .hero .big{font-size:34px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="demo"><b>示範資料</b>　此頁數字為模擬值，非實際廠內數據，僅供版面與流程驗證。</p>
+
+  <div class="topbar">
+    <div>
+      <h1>廠內品質與產能日報</h1>
+      <p class="stamp" id="stamp"></p>
+    </div>
+    <div class="tools">
+      <button id="theme" aria-label="切換深色或淺色模式">深／淺色</button>
+      <button onclick="window.print()">列印</button>
+    </div>
+  </div>
+
+  <noscript>
+    <p class="note">此頁由 JavaScript 依 DATA 產生表格，請開啟 JavaScript 後檢視。</p>
+  </noscript>
+
+  <div class="hero" id="hero"></div>
+
+  <section class="sec card flat">
+    <div class="hd"><h2>NG 前三名</h2><span class="meta">口徑：所有廠內異常通報</span></div>
+    <div class="rank" id="rank"></div>
+    <p class="note" id="ngNote"></p>
+  </section>
+
+  <section class="sec card">
+    <div class="hd"><h2>排程用稼動率（p20）</h2><span class="meta" id="utilMeta"></span></div>
+    <div class="scroll">
+      <table>
+        <thead><tr>
+          <th style="width:32%">機群</th><th class="num" style="width:12%">節拍</th>
+          <th class="pad" style="width:40%">稼動率</th><th class="num" style="width:16%">報工筆數</th>
+        </tr></thead>
+        <tbody id="utilBody"></tbody>
+      </table>
+    </div>
+    <p class="note">一律採 p20（20 百分位）：八成訂單可如期完成。改用中位數會讓約一半訂單延遲。</p>
+  </section>
+
+  <section class="sec card">
+    <div class="hd"><h2>待完成工單 — 依製程分配</h2><span class="meta" id="wipMeta"></span></div>
+    <div class="kpis" id="wipKpis"></div>
+    <div class="legend" id="wipLegend"></div>
+    <div class="scroll">
+      <table>
+        <thead><tr>
+          <th style="width:16%">製程</th><th class="num" style="width:11%">筆數</th>
+          <th class="num" style="width:17%">總數量</th><th class="num" style="width:10%">逾期</th>
+          <th class="pad" style="width:46%">急迫度分布</th>
+        </tr></thead>
+        <tbody id="wipBody"></tbody>
+      </table>
+    </div>
+    <p class="note">分布長度依筆數計算。預估工時待「製程 → 機群」對照表建立後補上。</p>
+  </section>
+
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   資料區 — 每日只需要改這個 DATA 物件，版面會自動重繪
+   ※ 目前為模擬值，正式上線時整段換成實際數據
+   ═══════════════════════════════════════════════════════════ */
+const DATA = {
+  updated: "2026-07-30",
+  source: "模擬資料　·　NG 2026/01–07　·　報工 166 工作日　·　派工清單 demo",
+
+  hero: [
+    { tone:"red",   label:"NG 事件總數",   value:"58",  sub:"平均每月 8.3 筆" },
+    { tone:"amber", label:"流程＋尺寸佔比", value:"38%", sub:"22 筆 · 優先改善" },
+    { tone:"green", label:"最佳機群稼動率", value:"81%", sub:"半自動 4B–4E" }
+  ],
+
+  ngTotal: 58,
+  ngTop: [
+    { name:"作業流程 NG",                  count:12, color:"red" },
+    { name:"尺寸異常（內外徑／肉厚／其他）", count:10, color:"orange" },
+    { name:"毛坯／材料 NG　·　技師架刀／架機", count:7,  color:"amber", note:"各 7 筆" }
+  ],
+  ngNote: "其後：5S 未歸位 5 筆（8.6%）、產品報廢 4 筆（6.9%）、其餘單筆項目共 13 筆（22.4%）。",
+
+  utilMeta: "模擬報工 4,120 筆 · 166 工作日",
+  util: [
+    { name:"全自動 3AB",            tact:"15s", rate:78, n:812,  kind:"auto" },
+    { name:"全自動 3AA",            tact:"15s", rate:55, n:466,  kind:"auto" },
+    { name:"全自動 3AC",            tact:"15s", rate:61, n:634,  kind:"auto" },
+    { name:"全自動 3AD",            tact:"15s", rate:64, n:571,  kind:"auto" },
+    { name:"全自動組代表值",         tact:"15s", rate:62, n:null, kind:"rep" },
+    { name:"全自動 2AA",            tact:"30s", rate:59, n:48,   kind:"auto", lowSample:true },
+    { name:"半自動 4B／4C／4D／4E",  tact:"27s", rate:81, n:790,  kind:"semi" },
+    { name:"手動 3A／3B／3C／3D",    tact:"45s", rate:46, n:1342, kind:"manual" },
+    { name:"手動 9A／9B／9E／9F",    tact:"30s", rate:53, n:241,  kind:"manual" },
+    { name:"手動 6A–6D",            tact:"27s", rate:null, n:1088, kind:"manual" },
+    { name:"自動 5AB",              tact:"30s", rate:null, n:164,  kind:"auto" },
+    { name:"半自動 5A",             tact:"10s", rate:null, n:298,  kind:"semi" },
+    { name:"半自動 3F",             tact:"27s", rate:null, n:203,  kind:"semi" }
+  ],
+
+  wipMeta: "派工清單 demo",
+  wipMaxOverdueDays: 24,
+  /* urgency 依序：已逾期、3 天內、一週內、一週外（筆數） */
+  wip: [
+    { proc:"成型",     qty:31450,  urgency:[3,2,1,42] },
+    { proc:"NC 管材",  qty:172800, urgency:[7,4,3,24] },
+    { proc:"切片",     qty:52300,  urgency:[2,1,7,8]  },
+    { proc:"NC 球高",  qty:3160,   urgency:[2,1,0,3]  },
+    { proc:"外徑",     qty:6400,   urgency:[4,1,0,1]  },
+    { proc:"烤爐",     qty:290,    urgency:[1,0,1,2]  },
+    { proc:"球高",     qty:9100,   urgency:[0,1,2,1]  },
+    { proc:"包裝",     qty:640,    urgency:[0,0,1,2]  }
+  ]
+};
+
+/* ═══════════════════════════════════════════════════════════
+   繪製
+   ═══════════════════════════════════════════════════════════ */
+const URGENCY = [
+  { key:"已逾期", css:"var(--red)" },
+  { key:"3 天內", css:"var(--orange)" },
+  { key:"一週內", css:"var(--amber)" },
+  { key:"一週外", css:"var(--gray)" }
+];
+const KIND = { auto:"var(--blue)", semi:"var(--green)", manual:"var(--orange)", rep:"var(--blue-d)" };
+const el = id => document.getElementById(id);
+const n0 = v => v.toLocaleString("en-US");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
+
+el("stamp").textContent = "更新於 " + DATA.updated + "　·　" + DATA.source;
+el("utilMeta").textContent = DATA.utilMeta;
+el("wipMeta").textContent = DATA.wipMeta;
+
+el("hero").innerHTML = DATA.hero.map(h => `
+  <div class="h-${h.tone}">
+    <p class="lbl">${esc(h.label)}</p>
+    <p class="big">${esc(h.value)}</p>
+    <p class="sub">${esc(h.sub)}</p>
+  </div>`).join("");
+
+el("rank").innerHTML = DATA.ngTop.map(r => {
+  const pct = r.count / DATA.ngTotal * 100;
+  const lbl = (r.note ? r.note : r.count + " 筆") + "　" +
+              (r.note ? "各 " : "") + pct.toFixed(1) + "%";
+  return `<div>
+    <div class="row"><span>${esc(r.name)}</span><span class="v">${esc(lbl)}</span></div>
+    <div class="track"><span style="width:${pct.toFixed(1)}%;background:var(--${r.color})"></span></div>
+  </div>`;
+}).join("");
+el("ngNote").textContent = DATA.ngNote;
+
+el("utilBody").innerHTML = DATA.util.map(u => {
+  const off = u.rate === null;
+  const col = KIND[u.kind];
+  const cell = off
+    ? `<td class="pad dim">節拍存疑，不填</td>`
+    : `<td class="pad"><span class="bar"><span class="t"><i style="width:${u.rate}%;background:${col}"></i></span><span class="p">${u.rate}%</span></span></td>`;
+  const nCell = u.n === null
+    ? `<td class="num dim">—</td>`
+    : `<td class="num ${u.lowSample ? "warn" : "dim"}">${n0(u.n)}${u.lowSample ? " ⚠" : ""}</td>`;
+  const nm = u.kind === "rep"
+    ? `<td style="color:${col};font-weight:500">${esc(u.name)}</td>`
+    : `<td>${esc(u.name)}</td>`;
+  return `<tr class="${off ? "off" : ""}">${nm}<td class="num dim">${u.tact}</td>${cell}${nCell}</tr>`;
+}).join("");
+
+const rows = DATA.wip.map(w => ({ ...w, count: w.urgency.reduce((a,b) => a+b, 0) }))
+                     .sort((a,b) => b.count - a.count);
+const tot = rows.reduce((a,r) => ({
+  count: a.count + r.count,
+  qty:   a.qty + r.qty,
+  urgency: a.urgency.map((v,i) => v + r.urgency[i])
+}), { count:0, qty:0, urgency:[0,0,0,0] });
+
+el("wipKpis").innerHTML = `
+  <div class="kpi"><p class="k">工單筆數</p><p class="n">${n0(tot.count)}</p></div>
+  <div class="kpi"><p class="k">總數量</p><p class="n">${n0(tot.qty)} <span class="u">pcs</span></p></div>
+  <div class="kpi"><p class="k">已逾期</p><p class="n" style="color:var(--red)">${tot.urgency[0]} <span class="u">筆</span></p><p class="f">最久 ${DATA.wipMaxOverdueDays} 天</p></div>
+  <div class="kpi"><p class="k">3 天內到期</p><p class="n" style="color:var(--amber)">${tot.urgency[1]} <span class="u">筆</span></p><p class="f">合計急件 ${tot.urgency[0] + tot.urgency[1]} 筆</p></div>`;
+
+el("wipLegend").innerHTML = URGENCY.map(u =>
+  `<span><i class="dot" style="background:${u.css}"></i>${u.key}</span>`).join("");
+
+const stack = (urg, count) => `<td class="pad"><span class="stack">` +
+  urg.map((v,i) => v ? `<i style="width:${(v/count*100).toFixed(1)}%;background:${URGENCY[i].css}"></i>` : "").join("") +
+  `</span></td>`;
+
+el("wipBody").innerHTML = rows.map(r => `
+  <tr>
+    <td>${esc(r.proc)}</td>
+    <td class="num">${n0(r.count)}</td>
+    <td class="num">${n0(r.qty)}</td>
+    <td class="num ${r.urgency[0] ? "bad" : "dim"}">${r.urgency[0]}</td>
+    ${stack(r.urgency, r.count)}
+  </tr>`).join("") + `
+  <tr class="sum">
+    <td>合計</td>
+    <td class="num">${n0(tot.count)}</td>
+    <td class="num">${n0(tot.qty)}</td>
+    <td class="num bad">${tot.urgency[0]}</td>
+    ${stack(tot.urgency, tot.count)}
+  </tr>`;
+
+const btn = el("theme");
+const saved = (() => { try { return localStorage.getItem("kpiTheme"); } catch (e) { return null; } })();
+if (saved) document.documentElement.dataset.theme = saved;
+btn.addEventListener("click", () => {
+  const cur = document.documentElement.dataset.theme;
+  const next = cur === "dark" ? "light" : "dark";
+  document.documentElement.dataset.theme = next;
+  try { localStorage.setItem("kpiTheme", next); } catch (e) {}
+});
+</script>
+</body>
+</html>
