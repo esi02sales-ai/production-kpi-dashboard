@@ -4,8 +4,6 @@
 
 公開網址:<https://esi02sales-ai.github.io/production-kpi-dashboard/>
 
-> 目前頁面為**模擬資料**,非實際廠內數據。
-
 ## 每日更新怎麼做
 
 1. 打開 `index.html`,找到 `<script>` 裡的 `DATA` 物件(檔案後段)

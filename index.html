@@ -51,14 +51,6 @@ body{
 }
 .wrap{max-width:1080px;margin:0 auto}
 
-.demo{
-  display:flex;align-items:center;gap:10px;
-  background:var(--bg-amber);color:var(--tx-amber);
-  border-radius:var(--radius);padding:10px 14px;
-  font-size:13px;margin-bottom:18px;
-}
-.demo b{font-weight:600}
-
 .topbar{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:20px}
 h1{font-size:21px;font-weight:600;letter-spacing:-.01em}
 .stamp{font-size:12.5px;color:var(--tx3);margin-top:2px}
@@ -145,8 +137,6 @@ tr.off td{color:var(--tx3)}
 <body>
 <div class="wrap">
 
-  <p class="demo"><b>示範資料</b>　此頁數字為模擬值，非實際廠內數據，僅供版面與流程驗證。</p>
-
   <div class="topbar">
     <div>
       <h1>廠內品質與產能日報</h1>
@@ -206,55 +196,54 @@ tr.off td{color:var(--tx3)}
 <script>
 /* ═══════════════════════════════════════════════════════════
    資料區 — 每日只需要改這個 DATA 物件，版面會自動重繪
-   ※ 目前為模擬值，正式上線時整段換成實際數據
    ═══════════════════════════════════════════════════════════ */
 const DATA = {
   updated: "2026-07-30",
-  source: "模擬資料　·　NG 2026/01–07　·　報工 166 工作日　·　派工清單 demo",
+  source: "NG 2026/01–07　·　報工 2025/12/23–2026/07/09　·　派工清單 v1",
 
   hero: [
-    { tone:"red",   label:"NG 事件總數",   value:"58",  sub:"平均每月 8.3 筆" },
-    { tone:"amber", label:"流程＋尺寸佔比", value:"38%", sub:"22 筆 · 優先改善" },
-    { tone:"green", label:"最佳機群稼動率", value:"81%", sub:"半自動 4B–4E" }
+    { tone:"red",   label:"NG 事件總數",   value:"43",  sub:"平均每月 6.1 筆" },
+    { tone:"amber", label:"流程＋尺寸佔比", value:"33%", sub:"14 筆 · 優先改善" },
+    { tone:"green", label:"最佳機群稼動率", value:"75%", sub:"半自動 4B–4E" }
   ],
 
-  ngTotal: 58,
+  ngTotal: 43,
   ngTop: [
-    { name:"作業流程 NG",                  count:12, color:"red" },
-    { name:"尺寸異常（內外徑／肉厚／其他）", count:10, color:"orange" },
-    { name:"毛坯／材料 NG　·　技師架刀／架機", count:7,  color:"amber", note:"各 7 筆" }
+    { name:"作業流程 NG",                  count:8, color:"red" },
+    { name:"尺寸異常（內外徑／肉厚／其他）", count:6, color:"orange" },
+    { name:"毛坯／材料 NG　·　技師架刀／架機", count:4, color:"amber", note:"各 4 筆" }
   ],
-  ngNote: "其後：5S 未歸位 5 筆（8.6%）、產品報廢 4 筆（6.9%）、其餘單筆項目共 13 筆（22.4%）。",
+  ngNote: "其後：5S 未歸位／產品報廢 各 3 筆（7.0%）、尺寸異常其他 2 筆（4.7%）、其餘單筆項目共 15 筆（34.9%）。明細加總尚差 1 筆待確認。",
 
-  utilMeta: "模擬報工 4,120 筆 · 166 工作日",
+  utilMeta: "自動報工 3,698 筆 · 166 工作日",
   util: [
-    { name:"全自動 3AB",            tact:"15s", rate:78, n:812,  kind:"auto" },
-    { name:"全自動 3AA",            tact:"15s", rate:55, n:466,  kind:"auto" },
-    { name:"全自動 3AC",            tact:"15s", rate:61, n:634,  kind:"auto" },
-    { name:"全自動 3AD",            tact:"15s", rate:64, n:571,  kind:"auto" },
-    { name:"全自動組代表值",         tact:"15s", rate:62, n:null, kind:"rep" },
-    { name:"全自動 2AA",            tact:"30s", rate:59, n:48,   kind:"auto", lowSample:true },
-    { name:"半自動 4B／4C／4D／4E",  tact:"27s", rate:81, n:790,  kind:"semi" },
-    { name:"手動 3A／3B／3C／3D",    tact:"45s", rate:46, n:1342, kind:"manual" },
-    { name:"手動 9A／9B／9E／9F",    tact:"30s", rate:53, n:241,  kind:"manual" },
-    { name:"手動 6A–6D",            tact:"27s", rate:null, n:1088, kind:"manual" },
-    { name:"自動 5AB",              tact:"30s", rate:null, n:164,  kind:"auto" },
-    { name:"半自動 5A",             tact:"10s", rate:null, n:298,  kind:"semi" },
-    { name:"半自動 3F",             tact:"27s", rate:null, n:203,  kind:"semi" }
+    { name:"全自動 3AB",            tact:"15s", rate:72, n:737,  kind:"auto" },
+    { name:"全自動 3AA",            tact:"15s", rate:49, n:412,  kind:"auto" },
+    { name:"全自動 3AC",            tact:"15s", rate:52, n:588,  kind:"auto" },
+    { name:"全自動 3AD",            tact:"15s", rate:57, n:539,  kind:"auto" },
+    { name:"全自動組代表值",         tact:"15s", rate:57, n:null, kind:"rep" },
+    { name:"全自動 2AA",            tact:"30s", rate:57, n:54,   kind:"auto", lowSample:true },
+    { name:"半自動 4B／4C／4D／4E",  tact:"27s", rate:75, n:713,  kind:"semi" },
+    { name:"手動 3A／3B／3C／3D",    tact:"45s", rate:42, n:1289, kind:"manual" },
+    { name:"手動 9A／9B／9E／9F",    tact:"30s", rate:52, n:218,  kind:"manual" },
+    { name:"手動 6A–6D",            tact:"27s", rate:null, n:1133, kind:"manual" },
+    { name:"自動 5AB",              tact:"30s", rate:null, n:152,  kind:"auto" },
+    { name:"半自動 5A",             tact:"10s", rate:null, n:316,  kind:"semi" },
+    { name:"半自動 3F",             tact:"27s", rate:null, n:185,  kind:"semi" }
   ],
 
-  wipMeta: "派工清單 demo",
-  wipMaxOverdueDays: 24,
+  wipMeta: "派工清單 v1",
+  wipMaxOverdueDays: 29,
   /* urgency 依序：已逾期、3 天內、一週內、一週外（筆數） */
   wip: [
-    { proc:"成型",     qty:31450,  urgency:[3,2,1,42] },
-    { proc:"NC 管材",  qty:172800, urgency:[7,4,3,24] },
-    { proc:"切片",     qty:52300,  urgency:[2,1,7,8]  },
-    { proc:"NC 球高",  qty:3160,   urgency:[2,1,0,3]  },
-    { proc:"外徑",     qty:6400,   urgency:[4,1,0,1]  },
-    { proc:"烤爐",     qty:290,    urgency:[1,0,1,2]  },
-    { proc:"球高",     qty:9100,   urgency:[0,1,2,1]  },
-    { proc:"包裝",     qty:640,    urgency:[0,0,1,2]  }
+    { proc:"成型",     qty:26962,  urgency:[2,1,0,45] },
+    { proc:"NC 管材",  qty:195363, urgency:[9,3,2,26] },
+    { proc:"切片",     qty:47000,  urgency:[1,0,9,6]  },
+    { proc:"NC 球高",  qty:2701,   urgency:[3,0,0,2]  },
+    { proc:"外徑",     qty:5800,   urgency:[5,0,0,0]  },
+    { proc:"烤爐",     qty:131,    urgency:[1,0,0,2]  },
+    { proc:"球高",     qty:8600,   urgency:[0,1,1,0]  },
+    { proc:"包裝",     qty:1,      urgency:[0,0,0,1]  }
   ]
 };
 
