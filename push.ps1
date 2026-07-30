@@ -1,13 +1,15 @@
-# 一鍵上傳 GitHub
+﻿# 一鍵上傳 GitHub
 # 用法：直接執行 upload.bat，或 powershell -File push.ps1 "自訂 commit 訊息"
-param([string]$Message)
+#       -NoPause：結束時不等待按鍵（供排程或其他腳本呼叫）
+param([string]$Message, [switch]$NoPause)
 
 $ErrorActionPreference = 'Stop'
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $repo = $PSScriptRoot
 Set-Location $repo
 
-function Fail($msg) { Write-Host ""; Write-Host "[失敗] $msg" -ForegroundColor Red; Read-Host "按 Enter 關閉"; exit 1 }
+function Pause-End { if (-not $NoPause) { Read-Host "按 Enter 關閉" | Out-Null } }
+function Fail($msg) { Write-Host ""; Write-Host "[失敗] $msg" -ForegroundColor Red; Pause-End; exit 1 }
 
 # 找 git
 $git = (Get-Command git -ErrorAction SilentlyContinue)
@@ -54,4 +56,4 @@ $url = git remote get-url origin
 Write-Host "Repo：$url"
 Write-Host "網頁更新需等 GitHub Pages 建置約 1 分鐘。"
 Write-Host ""
-Read-Host "按 Enter 關閉"
+Pause-End
