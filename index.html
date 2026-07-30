@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>廠內品質與產能日報</title>
+<title>廠內品質與產能日報（Báo cáo ngày chất lượng và năng suất nhà máy）</title>
 <style>
 :root{
   --page:#f2f1ec; --s1:#f8f7f3; --s2:#ffffff; --s0:#e8e7e1;
@@ -51,9 +51,13 @@ body{
 }
 .wrap{max-width:1080px;margin:0 auto}
 
+/* 越南文譯名：字級略小、顏色稍淡，中文仍是主視覺 */
+.vn{font-size:.86em;color:var(--tx3);font-weight:400}
+
 .topbar{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:20px}
 h1{font-size:21px;font-weight:600;letter-spacing:-.01em}
-.stamp{font-size:12.5px;color:var(--tx3);margin-top:2px}
+h1 .vn{display:block;font-size:14px;margin-top:2px}
+.stamp{font-size:12.5px;color:var(--tx3);margin-top:4px}
 .tools{display:flex;gap:8px}
 button{
   font:inherit;font-size:13px;color:var(--tx2);
@@ -73,37 +77,45 @@ h2{font-size:16px;font-weight:600;letter-spacing:-.005em}
 
 .hero{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
 .hero>div{border-radius:var(--card);padding:18px 20px}
-.hero .lbl{font-size:13px;font-weight:500}
-.hero .big{font-size:46px;line-height:1.02;font-weight:600;letter-spacing:-.03em;margin:4px 0 2px}
-.hero .sub{font-size:13px}
+.hero .lbl{font-size:13px;font-weight:500;line-height:1.45}
+.hero .lbl .vn{display:block;font-size:12px;color:inherit;opacity:.75}
+.hero .big{font-size:46px;line-height:1.02;font-weight:600;letter-spacing:-.03em;margin:6px 0 2px}
+.hero .sub{font-size:13px;line-height:1.45}
+.hero .sub .vn{display:block;font-size:12px;color:inherit;opacity:.75}
 .h-red{background:var(--bg-red)} .h-red .lbl,.h-red .sub{color:var(--tx-red);opacity:.85} .h-red .big{color:var(--tx-red)}
 .h-amber{background:var(--bg-amber)} .h-amber .lbl,.h-amber .sub{color:var(--tx-amber);opacity:.85} .h-amber .big{color:var(--tx-amber)}
 .h-green{background:var(--bg-green)} .h-green .lbl,.h-green .sub{color:var(--tx-green);opacity:.85} .h-green .big{color:var(--tx-green)}
 
 .rank{display:flex;flex-direction:column;gap:13px}
-.rank .row{display:flex;justify-content:space-between;gap:12px;font-size:14.5px;margin-bottom:6px}
-.rank .row .v{color:var(--tx2);white-space:nowrap}
+.rank .row{display:flex;justify-content:space-between;gap:12px;font-size:14.5px;margin-bottom:6px;align-items:flex-start}
+.rank .row .nm{line-height:1.4}
+.rank .row .nm .vn{display:block;font-size:12.5px}
+.rank .row .v{color:var(--tx2);white-space:nowrap;flex:none}
 .track{height:13px;border-radius:7px;background:var(--s0);overflow:hidden}
 .track>span{display:block;height:100%;border-radius:7px}
 
 .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
 .kpi{background:var(--s1);border-radius:var(--radius);padding:14px 16px}
 .card.flat .kpi{background:var(--s2)}
-.kpi .k{font-size:12.5px;color:var(--tx2)}
-.kpi .n{font-size:25px;font-weight:600;letter-spacing:-.02em;margin-top:2px}
+.kpi .k{font-size:12.5px;color:var(--tx2);line-height:1.45}
+.kpi .k .vn{display:block;font-size:11.5px}
+.kpi .n{font-size:25px;font-weight:600;letter-spacing:-.02em;margin-top:4px}
 .kpi .u{font-size:13px;font-weight:400;color:var(--tx3)}
-.kpi .f{font-size:12px;color:var(--tx3);margin-top:2px}
+.kpi .f{font-size:12px;color:var(--tx3);margin-top:2px;line-height:1.4}
 
 .legend{display:flex;flex-wrap:wrap;gap:16px;font-size:12.5px;color:var(--tx2);margin-bottom:12px}
 .legend span{display:flex;align-items:center;gap:6px}
 .dot{width:10px;height:10px;border-radius:2px;flex:none}
 
 .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
-table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:520px}
-th{font-size:12px;font-weight:400;color:var(--tx2);text-align:left;padding:0 0 8px;white-space:nowrap}
-td{padding:7px 0;border-top:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:700px}
+th{font-size:12px;font-weight:400;color:var(--tx2);text-align:left;padding:0 8px 8px 0;vertical-align:bottom;line-height:1.4}
+th .vn{display:block;font-size:11px}
+td{padding:7px 8px 7px 0;border-top:1px solid var(--line);vertical-align:middle}
+td .vn{display:block;font-size:11.5px}
 tr:first-child th{border-bottom:1px solid var(--line2)}
 .num{text-align:right;white-space:nowrap}
+th.num,td.num{padding-right:0}
 .dim{color:var(--tx3)}
 .warn{color:var(--amber)} .bad{color:var(--red);font-weight:500}
 tr.sum td{border-top:1px solid var(--line2);font-weight:600}
@@ -139,56 +151,69 @@ tr.off td{color:var(--tx3)}
 
   <div class="topbar">
     <div>
-      <h1>廠內品質與產能日報</h1>
+      <h1>廠內品質與產能日報<span class="vn">（Báo cáo ngày chất lượng và năng suất nhà máy）</span></h1>
       <p class="stamp" id="stamp"></p>
     </div>
     <div class="tools">
-      <button id="theme" aria-label="切換深色或淺色模式">深／淺色</button>
-      <button onclick="window.print()">列印</button>
+      <button id="theme" aria-label="切換深色或淺色模式（Chuyển chế độ sáng hoặc tối）">深／淺色<span class="vn">（Sáng／Tối）</span></button>
+      <button onclick="window.print()">列印<span class="vn">（In）</span></button>
     </div>
   </div>
 
   <noscript>
-    <p class="note">此頁由 JavaScript 依 DATA 產生表格，請開啟 JavaScript 後檢視。</p>
+    <p class="note">此頁由 JavaScript 依 DATA 產生表格，請開啟 JavaScript 後檢視。<span class="vn">（Trang này tạo bảng bằng JavaScript theo DATA, vui lòng bật JavaScript rồi xem lại.）</span></p>
   </noscript>
 
   <div class="hero" id="hero"></div>
 
   <section class="sec card flat">
-    <div class="hd"><h2>NG 前三名</h2><span class="meta">口徑：所有廠內異常通報</span></div>
+    <div class="hd">
+      <h2>NG 前三名<span class="vn">（Top 3 hạng mục NG）</span></h2>
+      <span class="meta">口徑：所有廠內異常通報（Phạm vi: toàn bộ thông báo bất thường trong nhà máy）</span>
+    </div>
     <div class="rank" id="rank"></div>
     <p class="note" id="ngNote"></p>
   </section>
 
   <section class="sec card">
-    <div class="hd"><h2>排程用稼動率（p20）</h2><span class="meta" id="utilMeta"></span></div>
+    <div class="hd">
+      <h2>排程用稼動率（p20）<span class="vn">（Tỷ lệ vận hành dùng để xếp lịch (p20)）</span></h2>
+      <span class="meta" id="utilMeta"></span>
+    </div>
     <div class="scroll">
       <table>
         <thead><tr>
-          <th style="width:32%">機群</th><th class="num" style="width:12%">節拍</th>
-          <th class="pad" style="width:40%">稼動率</th><th class="num" style="width:16%">報工筆數</th>
+          <th style="width:30%">機群<span class="vn">（Nhóm máy）</span></th>
+          <th class="num" style="width:12%">節拍<span class="vn">（Nhịp máy）</span></th>
+          <th class="pad" style="width:38%">稼動率<span class="vn">（Tỷ lệ vận hành）</span></th>
+          <th class="num" style="width:20%">報工筆數<span class="vn">（Số lần báo công）</span></th>
         </tr></thead>
         <tbody id="utilBody"></tbody>
       </table>
     </div>
-    <p class="note">一律採 p20（20 百分位）：八成訂單可如期完成。改用中位數會讓約一半訂單延遲。</p>
+    <p class="note">一律採 p20（20 百分位）：八成訂單可如期完成。改用中位數會讓約一半訂單延遲。<span class="vn">（Luôn dùng p20 (phân vị 20): 80% đơn hàng có thể hoàn thành đúng hạn. Nếu dùng trung vị thì khoảng một nửa đơn hàng sẽ bị trễ.）</span></p>
   </section>
 
   <section class="sec card">
-    <div class="hd"><h2>待完成工單 — 依製程分配</h2><span class="meta" id="wipMeta"></span></div>
+    <div class="hd">
+      <h2>待完成工單 — 依製程分配<span class="vn">（Đơn hàng chưa hoàn thành — phân theo công đoạn）</span></h2>
+      <span class="meta" id="wipMeta"></span>
+    </div>
     <div class="kpis" id="wipKpis"></div>
     <div class="legend" id="wipLegend"></div>
     <div class="scroll">
       <table>
         <thead><tr>
-          <th style="width:16%">製程</th><th class="num" style="width:11%">筆數</th>
-          <th class="num" style="width:17%">總數量</th><th class="num" style="width:10%">逾期</th>
-          <th class="pad" style="width:46%">急迫度分布</th>
+          <th style="width:20%">製程<span class="vn">（Công đoạn）</span></th>
+          <th class="num" style="width:10%">筆數<span class="vn">（Số đơn）</span></th>
+          <th class="num" style="width:15%">總數量<span class="vn">（Tổng số lượng）</span></th>
+          <th class="num" style="width:11%">逾期<span class="vn">（Trễ hạn）</span></th>
+          <th class="pad" style="width:44%">急迫度分布<span class="vn">（Phân bố mức độ gấp）</span></th>
         </tr></thead>
         <tbody id="wipBody"></tbody>
       </table>
     </div>
-    <p class="note">分布長度依筆數計算。預估工時待「製程 → 機群」對照表建立後補上。</p>
+    <p class="note">分布長度依筆數計算。預估工時待「製程 → 機群」對照表建立後補上。<span class="vn">（Độ dài phân bố tính theo số đơn. Giờ công dự kiến sẽ bổ sung sau khi lập bảng đối chiếu "công đoạn → nhóm máy".）</span></p>
   </section>
 
 </div>
@@ -196,105 +221,138 @@ tr.off td{color:var(--tx3)}
 <script>
 /* ═══════════════════════════════════════════════════════════
    資料區 — 每日只需要改這個 DATA 物件，版面會自動重繪
+   每個文字欄位都有 vn 對應欄，放越南文譯名（會顯示在括弧內）
    ═══════════════════════════════════════════════════════════ */
 const DATA = {
   updated: "2026-07-30",
   source: "NG 2026/01–07　·　報工 2025/12/23–2026/07/09　·　派工清單 v1",
+  sourceVn: "NG 2026/01–07　·　Báo công 2025/12/23–2026/07/09　·　Danh sách phân công v1",
 
   hero: [
-    { tone:"red",   label:"NG 事件總數",   value:"43",  sub:"平均每月 6.1 筆" },
-    { tone:"amber", label:"流程＋尺寸佔比", value:"33%", sub:"14 筆 · 優先改善" },
-    { tone:"green", label:"最佳機群稼動率", value:"75%", sub:"半自動 4B–4E" }
+    { tone:"red",   label:"NG 事件總數",   labelVn:"Tổng số vụ NG",
+      value:"43",  sub:"平均每月 6.1 筆",  subVn:"Bình quân 6,1 vụ mỗi tháng" },
+    { tone:"amber", label:"流程＋尺寸佔比", labelVn:"Tỷ lệ quy trình + kích thước",
+      value:"33%", sub:"14 筆 · 優先改善",  subVn:"14 vụ · Ưu tiên cải thiện" },
+    { tone:"green", label:"最佳機群稼動率", labelVn:"Tỷ lệ vận hành cao nhất",
+      value:"75%", sub:"半自動 4B–4E",     subVn:"Bán tự động 4B–4E" }
   ],
 
   ngTotal: 43,
   ngTop: [
-    { name:"作業流程 NG",                  count:8, color:"red" },
-    { name:"尺寸異常（內外徑／肉厚／其他）", count:6, color:"orange" },
-    { name:"毛坯／材料 NG　·　技師架刀／架機", count:4, color:"amber", note:"各 4 筆" }
+    { name:"作業流程 NG", nameVn:"NG quy trình tác nghiệp", count:8, color:"red" },
+    { name:"尺寸異常（內外徑／肉厚／其他）",
+      nameVn:"Bất thường kích thước (đường kính trong／ngoài, độ dày, khác)",
+      count:6, color:"orange" },
+    { name:"毛坯／材料 NG　·　技師架刀／架機",
+      nameVn:"NG phôi／vật liệu　·　Kỹ thuật viên gá dao／gá máy",
+      count:4, color:"amber", note:"各 4 筆", noteVn:"Mỗi loại 4 vụ" }
   ],
   ngNote: "其後：5S 未歸位／產品報廢 各 3 筆（7.0%）、尺寸異常其他 2 筆（4.7%）、其餘單筆項目共 15 筆（34.9%）。明細加總尚差 1 筆待確認。",
+  ngNoteVn: "Tiếp theo: 5S chưa xếp đúng chỗ／phế phẩm mỗi loại 3 vụ (7,0%), bất thường kích thước khác 2 vụ (4,7%), các hạng mục lẻ còn lại tổng 15 vụ (34,9%). Tổng chi tiết còn thiếu 1 vụ cần xác nhận.",
 
   utilMeta: "自動報工 3,698 筆 · 166 工作日",
+  utilMetaVn: "Báo công tự động 3.698 lần · 166 ngày làm việc",
   util: [
-    { name:"全自動 3AB",            tact:"15s", rate:72, n:737,  kind:"auto" },
-    { name:"全自動 3AA",            tact:"15s", rate:49, n:412,  kind:"auto" },
-    { name:"全自動 3AC",            tact:"15s", rate:52, n:588,  kind:"auto" },
-    { name:"全自動 3AD",            tact:"15s", rate:57, n:539,  kind:"auto" },
-    { name:"全自動組代表值",         tact:"15s", rate:57, n:null, kind:"rep" },
-    { name:"全自動 2AA",            tact:"30s", rate:57, n:54,   kind:"auto", lowSample:true },
-    { name:"半自動 4B／4C／4D／4E",  tact:"27s", rate:75, n:713,  kind:"semi" },
-    { name:"手動 3A／3B／3C／3D",    tact:"45s", rate:42, n:1289, kind:"manual" },
-    { name:"手動 9A／9B／9E／9F",    tact:"30s", rate:52, n:218,  kind:"manual" },
-    { name:"手動 6A–6D",            tact:"27s", rate:null, n:1133, kind:"manual" },
-    { name:"自動 5AB",              tact:"30s", rate:null, n:152,  kind:"auto" },
-    { name:"半自動 5A",             tact:"10s", rate:null, n:316,  kind:"semi" },
-    { name:"半自動 3F",             tact:"27s", rate:null, n:185,  kind:"semi" }
+    { name:"全自動 3AB",  nameVn:"Tự động hoàn toàn 3AB", tact:"15s", rate:72, n:737,  kind:"auto" },
+    { name:"全自動 3AA",  nameVn:"Tự động hoàn toàn 3AA", tact:"15s", rate:49, n:412,  kind:"auto" },
+    { name:"全自動 3AC",  nameVn:"Tự động hoàn toàn 3AC", tact:"15s", rate:52, n:588,  kind:"auto" },
+    { name:"全自動 3AD",  nameVn:"Tự động hoàn toàn 3AD", tact:"15s", rate:57, n:539,  kind:"auto" },
+    { name:"全自動組代表值", nameVn:"Giá trị đại diện nhóm tự động hoàn toàn",
+      tact:"15s", rate:57, n:null, kind:"rep" },
+    { name:"全自動 2AA",  nameVn:"Tự động hoàn toàn 2AA", tact:"30s", rate:57, n:54, kind:"auto", lowSample:true },
+    { name:"半自動 4B／4C／4D／4E", nameVn:"Bán tự động 4B／4C／4D／4E", tact:"27s", rate:75, n:713,  kind:"semi" },
+    { name:"手動 3A／3B／3C／3D",   nameVn:"Thủ công 3A／3B／3C／3D",   tact:"45s", rate:42, n:1289, kind:"manual" },
+    { name:"手動 9A／9B／9E／9F",   nameVn:"Thủ công 9A／9B／9E／9F",   tact:"30s", rate:52, n:218,  kind:"manual" },
+    { name:"手動 6A–6D",  nameVn:"Thủ công 6A–6D",        tact:"27s", rate:null, n:1133, kind:"manual" },
+    { name:"自動 5AB",    nameVn:"Tự động 5AB",           tact:"30s", rate:null, n:152,  kind:"auto" },
+    { name:"半自動 5A",   nameVn:"Bán tự động 5A",        tact:"10s", rate:null, n:316,  kind:"semi" },
+    { name:"半自動 3F",   nameVn:"Bán tự động 3F",        tact:"27s", rate:null, n:185,  kind:"semi" }
   ],
 
   wipMeta: "派工清單 v1",
+  wipMetaVn: "Danh sách phân công v1",
   wipMaxOverdueDays: 29,
   /* urgency 依序：已逾期、3 天內、一週內、一週外（筆數） */
   wip: [
-    { proc:"成型",     qty:26962,  urgency:[2,1,0,45] },
-    { proc:"NC 管材",  qty:195363, urgency:[9,3,2,26] },
-    { proc:"切片",     qty:47000,  urgency:[1,0,9,6]  },
-    { proc:"NC 球高",  qty:2701,   urgency:[3,0,0,2]  },
-    { proc:"外徑",     qty:5800,   urgency:[5,0,0,0]  },
-    { proc:"烤爐",     qty:131,    urgency:[1,0,0,2]  },
-    { proc:"球高",     qty:8600,   urgency:[0,1,1,0]  },
-    { proc:"包裝",     qty:1,      urgency:[0,0,0,1]  }
+    { proc:"成型",    procVn:"Tạo hình",            qty:26962,  urgency:[2,1,0,45] },
+    { proc:"NC 管材", procVn:"Ống NC",              qty:195363, urgency:[9,3,2,26] },
+    { proc:"切片",    procVn:"Cắt lát",             qty:47000,  urgency:[1,0,9,6]  },
+    { proc:"NC 球高", procVn:"Độ cao bi NC",        qty:2701,   urgency:[3,0,0,2]  },
+    { proc:"外徑",    procVn:"Đường kính ngoài",    qty:5800,   urgency:[5,0,0,0]  },
+    { proc:"烤爐",    procVn:"Lò sấy",              qty:131,    urgency:[1,0,0,2]  },
+    { proc:"球高",    procVn:"Độ cao bi",           qty:8600,   urgency:[0,1,1,0]  },
+    { proc:"包裝",    procVn:"Đóng gói",            qty:1,      urgency:[0,0,0,1]  }
   ]
+};
+
+/* 固定用語的中越對照 */
+const T = {
+  updated:   { zh:"更新於",        vn:"Cập nhật" },
+  noTact:    { zh:"節拍存疑，不填", vn:"Nhịp máy chưa xác thực, không điền" },
+  orders:    { zh:"工單筆數",      vn:"Số đơn hàng" },
+  totalQty:  { zh:"總數量",        vn:"Tổng số lượng" },
+  overdue:   { zh:"已逾期",        vn:"Đã trễ hạn" },
+  due3:      { zh:"3 天內到期",    vn:"Đến hạn trong 3 ngày" },
+  longest:   { zh:"最久",          vn:"Lâu nhất" },
+  days:      { zh:"天",            vn:"ngày" },
+  rushTotal: { zh:"合計急件",      vn:"Tổng đơn gấp" },
+  unit:      { zh:"筆",            vn:"đơn" },   /* 工單用 */
+  unitNg:    { zh:"筆",            vn:"vụ" },    /* NG 事件用 */
+  sum:       { zh:"合計",          vn:"Tổng cộng" }
 };
 
 /* ═══════════════════════════════════════════════════════════
    繪製
    ═══════════════════════════════════════════════════════════ */
 const URGENCY = [
-  { key:"已逾期", css:"var(--red)" },
-  { key:"3 天內", css:"var(--orange)" },
-  { key:"一週內", css:"var(--amber)" },
-  { key:"一週外", css:"var(--gray)" }
+  { key:"已逾期", vn:"Đã trễ hạn",   css:"var(--red)" },
+  { key:"3 天內", vn:"Trong 3 ngày", css:"var(--orange)" },
+  { key:"一週內", vn:"Trong 1 tuần", css:"var(--amber)" },
+  { key:"一週外", vn:"Ngoài 1 tuần", css:"var(--gray)" }
 ];
 const KIND = { auto:"var(--blue)", semi:"var(--green)", manual:"var(--orange)", rep:"var(--blue-d)" };
 const el = id => document.getElementById(id);
 const n0 = v => v.toLocaleString("en-US");
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
+/* 中文 + 括弧越南文 */
+const vn = t => t ? `<span class="vn">（${esc(t)}）</span>` : "";
+const bi = (zh, viet) => esc(zh) + vn(viet);
 
-el("stamp").textContent = "更新於 " + DATA.updated + "　·　" + DATA.source;
-el("utilMeta").textContent = DATA.utilMeta;
-el("wipMeta").textContent = DATA.wipMeta;
+el("stamp").innerHTML = bi(T.updated.zh, T.updated.vn) + " " + esc(DATA.updated) +
+  "　·　" + esc(DATA.source) + vn(DATA.sourceVn);
+el("utilMeta").innerHTML = bi(DATA.utilMeta, DATA.utilMetaVn);
+el("wipMeta").innerHTML = bi(DATA.wipMeta, DATA.wipMetaVn);
 
 el("hero").innerHTML = DATA.hero.map(h => `
   <div class="h-${h.tone}">
-    <p class="lbl">${esc(h.label)}</p>
+    <p class="lbl">${bi(h.label, h.labelVn)}</p>
     <p class="big">${esc(h.value)}</p>
-    <p class="sub">${esc(h.sub)}</p>
+    <p class="sub">${bi(h.sub, h.subVn)}</p>
   </div>`).join("");
 
 el("rank").innerHTML = DATA.ngTop.map(r => {
   const pct = r.count / DATA.ngTotal * 100;
-  const lbl = (r.note ? r.note : r.count + " 筆") + "　" +
-              (r.note ? "各 " : "") + pct.toFixed(1) + "%";
+  const cnt = r.note ? bi(r.note, r.noteVn) : esc(r.count + " 筆") + vn(r.count + " " + T.unitNg.vn);
+  const lbl = cnt + "　" + (r.note ? "各 " : "") + pct.toFixed(1) + "%";
   return `<div>
-    <div class="row"><span>${esc(r.name)}</span><span class="v">${esc(lbl)}</span></div>
+    <div class="row"><span class="nm">${bi(r.name, r.nameVn)}</span><span class="v">${lbl}</span></div>
     <div class="track"><span style="width:${pct.toFixed(1)}%;background:var(--${r.color})"></span></div>
   </div>`;
 }).join("");
-el("ngNote").textContent = DATA.ngNote;
+el("ngNote").innerHTML = bi(DATA.ngNote, DATA.ngNoteVn);
 
 el("utilBody").innerHTML = DATA.util.map(u => {
   const off = u.rate === null;
   const col = KIND[u.kind];
   const cell = off
-    ? `<td class="pad dim">節拍存疑，不填</td>`
+    ? `<td class="pad dim">${bi(T.noTact.zh, T.noTact.vn)}</td>`
     : `<td class="pad"><span class="bar"><span class="t"><i style="width:${u.rate}%;background:${col}"></i></span><span class="p">${u.rate}%</span></span></td>`;
   const nCell = u.n === null
     ? `<td class="num dim">—</td>`
     : `<td class="num ${u.lowSample ? "warn" : "dim"}">${n0(u.n)}${u.lowSample ? " ⚠" : ""}</td>`;
   const nm = u.kind === "rep"
-    ? `<td style="color:${col};font-weight:500">${esc(u.name)}</td>`
-    : `<td>${esc(u.name)}</td>`;
+    ? `<td style="color:${col};font-weight:500">${bi(u.name, u.nameVn)}</td>`
+    : `<td>${bi(u.name, u.nameVn)}</td>`;
   return `<tr class="${off ? "off" : ""}">${nm}<td class="num dim">${u.tact}</td>${cell}${nCell}</tr>`;
 }).join("");
 
@@ -307,13 +365,17 @@ const tot = rows.reduce((a,r) => ({
 }), { count:0, qty:0, urgency:[0,0,0,0] });
 
 el("wipKpis").innerHTML = `
-  <div class="kpi"><p class="k">工單筆數</p><p class="n">${n0(tot.count)}</p></div>
-  <div class="kpi"><p class="k">總數量</p><p class="n">${n0(tot.qty)} <span class="u">pcs</span></p></div>
-  <div class="kpi"><p class="k">已逾期</p><p class="n" style="color:var(--red)">${tot.urgency[0]} <span class="u">筆</span></p><p class="f">最久 ${DATA.wipMaxOverdueDays} 天</p></div>
-  <div class="kpi"><p class="k">3 天內到期</p><p class="n" style="color:var(--amber)">${tot.urgency[1]} <span class="u">筆</span></p><p class="f">合計急件 ${tot.urgency[0] + tot.urgency[1]} 筆</p></div>`;
+  <div class="kpi"><p class="k">${bi(T.orders.zh, T.orders.vn)}</p><p class="n">${n0(tot.count)}</p></div>
+  <div class="kpi"><p class="k">${bi(T.totalQty.zh, T.totalQty.vn)}</p><p class="n">${n0(tot.qty)} <span class="u">pcs</span></p></div>
+  <div class="kpi"><p class="k">${bi(T.overdue.zh, T.overdue.vn)}</p>
+    <p class="n" style="color:var(--red)">${tot.urgency[0]} <span class="u">筆（${T.unit.vn}）</span></p>
+    <p class="f">${T.longest.zh} ${DATA.wipMaxOverdueDays} ${T.days.zh}（${T.longest.vn} ${DATA.wipMaxOverdueDays} ${T.days.vn}）</p></div>
+  <div class="kpi"><p class="k">${bi(T.due3.zh, T.due3.vn)}</p>
+    <p class="n" style="color:var(--amber)">${tot.urgency[1]} <span class="u">筆（${T.unit.vn}）</span></p>
+    <p class="f">${T.rushTotal.zh} ${tot.urgency[0] + tot.urgency[1]} ${T.unit.zh}（${T.rushTotal.vn}: ${tot.urgency[0] + tot.urgency[1]}）</p></div>`;
 
 el("wipLegend").innerHTML = URGENCY.map(u =>
-  `<span><i class="dot" style="background:${u.css}"></i>${u.key}</span>`).join("");
+  `<span><i class="dot" style="background:${u.css}"></i>${bi(u.key, u.vn)}</span>`).join("");
 
 const stack = (urg, count) => `<td class="pad"><span class="stack">` +
   urg.map((v,i) => v ? `<i style="width:${(v/count*100).toFixed(1)}%;background:${URGENCY[i].css}"></i>` : "").join("") +
@@ -321,14 +383,14 @@ const stack = (urg, count) => `<td class="pad"><span class="stack">` +
 
 el("wipBody").innerHTML = rows.map(r => `
   <tr>
-    <td>${esc(r.proc)}</td>
+    <td>${bi(r.proc, r.procVn)}</td>
     <td class="num">${n0(r.count)}</td>
     <td class="num">${n0(r.qty)}</td>
     <td class="num ${r.urgency[0] ? "bad" : "dim"}">${r.urgency[0]}</td>
     ${stack(r.urgency, r.count)}
   </tr>`).join("") + `
   <tr class="sum">
-    <td>合計</td>
+    <td>${bi(T.sum.zh, T.sum.vn)}</td>
     <td class="num">${n0(tot.count)}</td>
     <td class="num">${n0(tot.qty)}</td>
     <td class="num bad">${tot.urgency[0]}</td>
